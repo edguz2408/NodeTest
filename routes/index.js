@@ -20,30 +20,25 @@ router.get('/scrape', function(req, res){
 			var title, price;
 			var objs = [];
 			//var json = { title : "", price : ""};
-			var complete = false;
+			//var complete = false;
       
       //res.send(html);
       
       $('.a-size-medium, .a-color-price').each(function(i, element) {
         var data = $(element);
+       
         
-        if(complete == false)
-        	var json = { title : "", price : ""};
         /*title = data.text();
         json.title = title;*/
         if(data.is('h2'))
-           json.title = data.text();
+           title = data.text();
         
         if(data.is('span'))
-            json.price = data.text();
+            price = data.text();
         
-        if(json.price != ''){
-          objs.push(json);
-          complete = false;
-        } else {
-          complete = true;
+        if(price != ''){
+           objs.push({'tile':tile, 'price':price});
         }
-            
         
       });
       
