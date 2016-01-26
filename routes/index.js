@@ -22,7 +22,7 @@ router.get('/scrape', function(req, res){
       
       //res.send(html);
       
-      $('h2.a-size-medium').each(function(i, element) {
+      $('.a-size-medium').each(function(i, element) {
         var data = $(element);
         title = data.text();
         json.title = title;
