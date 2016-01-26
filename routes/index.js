@@ -9,7 +9,7 @@ router.get('/home', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
-var j = $.noConflict();
+var j = jQuery.noConflict();
 
 j(document).ready(function() {
   j(document).on('click', '#btnSearch', search);
