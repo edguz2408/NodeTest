@@ -19,18 +19,23 @@ router.get('/scrape', function(req, res){
 
 			var title, price;
 			var objs = [];
-			//var json = { title : "", price : ""};
+			var json = { title : "", price : ""};
       
       //res.send(html);
       
       $('.a-size-medium, .a-color-price').each(function(i, element) {
-        /*var data = $(element);
-        title = data.text();
-        json.title = title;*/
         var data = $(element);
+        //var json = { title : "", price : ""};
+        /*title = data.text();
+        json.title = title;*/
+        if(data.is('h2'))
+           json.title = data.text();
         
-        var jsonObj = {'title' : data.text(), 'price' : data.text()};
-        objs.push(jsonObj);
+        if(data.is('span'))
+            json.price = data.text();
+        
+        if(json.price != '')
+            objs.push(json);
         
       });
       
