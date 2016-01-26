@@ -1,5 +1,11 @@
 extends layout
-
+head
+  script(src='https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js')
 block content
   h1= title
   p Welcome to #{title}
+  
+  
+  #content
+    input#inputSearch(type="text", placeholder="Search")
+    input#btnSearch(type="button") Search
