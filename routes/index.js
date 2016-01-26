@@ -20,7 +20,9 @@ router.get('/scrape', function(req, res){
 			var title, price;
 			var json = { title : "", price : ""};
       
-      $('.a-size-medium a-color-null s-inline s-access-title a-text-normal').filter(function() {
+      res.send(html);
+      
+      /*$('h2.a-size-medium a-color-null s-inline s-access-title a-text-normal').filter(function() {
         var data = $(this);
         title = data.text();
         json.title = title;
@@ -38,8 +40,8 @@ router.get('/scrape', function(req, res){
         	console.log('File successfully written! - Check your project directory for the output.json file');
         })
 
-      res.json(json);
-      })
+      res.json(json);*/
+    })
   
   
 });
