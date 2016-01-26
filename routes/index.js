@@ -33,7 +33,7 @@ router.get('/scrape', function(req, res){
         var data = $(this);
         price = data.text();
         json.price = price;
-      });*/
+      });
 		
 		}
 
