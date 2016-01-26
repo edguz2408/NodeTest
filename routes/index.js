@@ -30,7 +30,7 @@ router.get('/scrape', function(req, res){
         var = $(element);
         
         var jsonObj = {'title' : data.text(), 'price' : data.text()};
-        objs.push(json);
+        objs.push(jsonObj);
         
       });
       
