@@ -37,7 +37,7 @@ router.get('/scrape', function(req, res){
             price = data.text();
         
         if(price != ''){
-           objs.push({'tile':tile, 'price':price});
+           objs.push({'title':title, 'price':price});
         }
         
       });
