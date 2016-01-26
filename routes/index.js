@@ -32,11 +32,11 @@ router.get('/scrape', function(req, res){
         var data = $(this);
         price = data.text();
         json.price = price;
-      });
+      });*/
 		
 		}
 
-		fs.writeFile('output.json', JSON.stringify(json, null, 4), function(err){
+		/*fs.writeFile('output.json', JSON.stringify(json, null, 4), function(err){
         	console.log('File successfully written! - Check your project directory for the output.json file');
         })
 
