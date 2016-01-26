@@ -20,27 +20,27 @@ router.get('/scrape', function(req, res){
 			var title, price;
 			var json = { title : "", price : ""};
       
-      res.send(html);
+      //res.send(html);
       
-      /*$('h2.a-size-medium a-color-null s-inline s-access-title a-text-normal').filter(function() {
+      $('h2.a-size-medium').filter(function() {
         var data = $(this);
         title = data.text();
         json.title = title;
       });
       
-      $('.a-size-base a-color-price s-price a-text-bold').filter(function() {
+      $('.a-size-base').filter(function() {
         var data = $(this);
         price = data.text();
         json.price = price;
-      });*/
+      });
 		
 		}
 
-		/*fs.writeFile('output.json', JSON.stringify(json, null, 4), function(err){
+		fs.writeFile('output.json', JSON.stringify(json, null, 4), function(err){
         	console.log('File successfully written! - Check your project directory for the output.json file');
         })
 
-      res.json(json);*/
+      res.json(json);
     })
   
   
