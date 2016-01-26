@@ -18,30 +18,34 @@ router.get('/scrape', function(req, res){
 			var $ = cheerio.load(html);
 
 			var title, price;
-			var json = { title : "", price : ""};
+			var objs = [];
+			//var json = { title : "", price : ""};
       
       //res.send(html);
       
-      $('.a-size-medium').each(function(i, element) {
-        var data = $(element);
+      $('.a-size-medium, .a-color-price').each(function(i, element) {
+        /*var data = $(element);
         title = data.text();
-        json.title = title;
+        json.title = title;*/
+        
+        var json {title : element.text(), price : element.text()}
+        objs.push(json);
         
       });
       
-      $('.a-size-base').filter(function() {
+      /*$('.a-size-base').filter(function() {
         var data = $(this);
         price = data.text();
         json.price = price;
-      });
+      });*/
 		
 		}
 
-		fs.writeFile('output.json', JSON.stringify(json, null, 4), function(err){
+		fs.writeFile('output.json', JSON.stringify(objs, null, 4), function(err){
         	console.log('File successfully written! - Check your project directory for the output.json file');
         })
 
-      res.json(json);
+      res.json(objs);
     })
   
   
