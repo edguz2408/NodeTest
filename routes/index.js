@@ -24,21 +24,20 @@ router.get('/scrape', function(req, res){
       
       //res.send(html);
       
-      $('.a-size-medium, .a-color-price').each(function(i, element) {
+      $('.a-fixed-left-grid-inner').each(function(i, element) {
         var data = $(element);
        
         
-        /*title = data.text();
-        json.title = title;*/
-        if(data.is('h2'))
-           title = data.text();
         
-        if(data.is('span'))
-            price = data.text();
+          if(data.find('.a-size-medium').length > 0)
+           title = data.find('.a-size-medium').text();
         
-        if(price != ''){
+           if(data.find('.a-size-base').length > 0)
+            price = find('.a-size-base').text();
+        
+     
            objs.push({'title':title, 'price':price});
-        }
+        
         
       });
       
