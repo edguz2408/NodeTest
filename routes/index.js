@@ -9,17 +9,15 @@ router.get('/home', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
-var j = jQuery.noConflict();
-
-j(document).ready(function() {
-  j(document).on('click', '#btnSearch', search);
+$(document).ready(function() {
+  $(document).on('click', '#btnSearch', search);
 });
 
 function search(){
   
   //url = 'http://www.imdb.com/title/tt1229340/';
   
-  var searchValue = j('#inputSearch').val();
+  var searchValue = $('#inputSearch').val();
   url = 'http://www.amazon.com/s/ref=nb_sb_noss_2?url=search-alias%3Daps&field-keywords=' + searchValue;
   
   request(url, function(error, response, html){
