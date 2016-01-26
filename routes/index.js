@@ -33,7 +33,7 @@ router.get('/scrape', function(req, res){
            title = data.find('.a-size-medium').text();
         
            if(data.find('.a-size-base').length > 0)
-            price = find('.a-size-base').text();
+            price = data.find('.a-size-base').text();
         
      
            objs.push({'title':title, 'price':price});
