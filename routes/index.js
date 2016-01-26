@@ -9,13 +9,23 @@ router.get('/home', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
-router.get('/scrape', function(req, res){
+var j = $.noConflict();
+
+j(document).ready(function() {
+  j(document).on('click', '#btnSearch', search);
+});
+
+function search(){
   
-  url = 'http://www.imdb.com/title/tt1229340/';
+  //url = 'http://www.imdb.com/title/tt1229340/';
+  
+  var searchValue = j('#inputSearch').val();
+  url = 'http://www.amazon.com/s/ref=nb_sb_noss_2?url=search-alias%3Daps&field-keywords=' + searchValue;
   
   request(url, function(error, response, html){
 		if(!error){
 			var $ = cheerio.load(html);
+      console.log(html);
 
 			var title, release, rating;
 			var json = { title : "", release : "", rating : ""};
@@ -45,6 +55,6 @@ router.get('/scrape', function(req, res){
       })
   
   
-});
+}
 
 module.exports = router;
