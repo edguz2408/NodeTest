@@ -3,6 +3,7 @@ var router = express.Router();
 var fs = require('fs');
 var request = require('request');
 var cheerio = require('cheerio');
+var $ = require('jQuery');
 
 /* GET home page. */
 router.get('/home', function(req, res, next) {
