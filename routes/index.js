@@ -41,7 +41,7 @@ router.get('/scrape', function(req, res){
         	console.log('File successfully written! - Check your project directory for the output.json file');
         })
 
-      res.send('Check your console!')
+      res.send(JSON.stringify(json));
       })
   
   
