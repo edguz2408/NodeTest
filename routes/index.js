@@ -22,29 +22,21 @@ router.get('/scrape/:searchParam', function(req, res, next) {
     'http://www.ebay.com/sch/i.html?_from=R40&_trksid=p2050601.m570.l1311.R1.TR12.TRC2.A0.H0.Xwact.TRS0&_nkw=' + req.params.searchParam
   ];
   
-  //setInterval(function(){
-   
     getData(urls, res, middleFunc);
     console.log(results);
    
-    
-    //res.json(results); 
-    
-  //}, 10000);
 
 });
 
 function middleFunc(objs, res){
   console.log('callback::' + objs);
-  res.header('Something', 'else');
   res.json(objs);
 }
 
 function getData(urls, res, callback){
-  
 
-  for (i = 0; i < urls.length; i++) {
-    request(urls[i], function(error, response, html) {
+  //for (i = 0; i < urls.length; i++) {
+    request(urls[0], function(error, response, html) {
       if (!error) {
         var $ = cheerio.load(html);
         
@@ -86,14 +78,16 @@ function getData(urls, res, callback){
           });
 
         });
+        
+        callback(objs, res);
 
       }
         
     });
     console.log('results1:: ' + objs);
-  }
+  //}
    console.log('results:: ' + objs);
-   callback(objs, res);
+   
   //console.log(result);
   
   //res.end(objs);
