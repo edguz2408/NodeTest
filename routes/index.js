@@ -32,14 +32,15 @@ function middleFunc(objs){
 
 function getData(urls, callback){
   
-  var objs = [];
-  var title, price, url;
 
   for (i = 0; i < urls.length; i++) {
-    request(urls, function(error, response, html) {
+    request(urls[i], function(error, response, html) {
       if (!error) {
         var $ = cheerio.load(html);
-      
+        
+        var objs = [];
+        var title, price, url;
+        
         $('.s-item-container').each(function(i, element) {
           var data = $(element);
 
