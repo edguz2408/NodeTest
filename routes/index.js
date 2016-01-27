@@ -88,14 +88,12 @@ function getData(urls, res, callback){
         });
 
       }
-      console.log('results:: ' + objs);
-      console.log(i);
-      console.log(urls.length);
-      if(i === urls.length)
-        callback(objs, res, i);
+        
     });
+    console.log('results1:: ' + objs);
   }
-
+   console.log('results:: ' + objs);
+   callback(objs, res, i);
   //console.log(result);
   
   //res.end(objs);
