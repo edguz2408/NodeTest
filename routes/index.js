@@ -22,22 +22,22 @@ router.get('/scrape/:searchParam', function(req, res) {
     'http://www.ebay.com/sch/i.html?_from=R40&_trksid=p2050601.m570.l1311.R1.TR12.TRC2.A0.H0.Xwact.TRS0&_nkw=' + req.params.searchParam
   ];
   
-  setInterval(function(){
-     results = getData(urls, middleFunc);
+  //setInterval(function(){
+    getData(urls, middleFunc, res);
     console.log(results);
-    res.json(results); 
+    //res.json(results); 
     
-  }, 10000);
+  //}, 10000);
 
 });
 
-function middleFunc(objs){
+function middleFunc(objs, res){
   console.log('callback::' + objs);
-  return objs;
+  res.json(objs);
   
 }
 
-function getData(urls, callback){
+function getData(urls, res, callback){
   
 
   for (i = 0; i < urls.length; i++) {
@@ -86,7 +86,7 @@ function getData(urls, callback){
 
       }
       console.log('results:: ' + objs);
-      callback(objs);
+      callback(objs, res);
     });
   }
 
