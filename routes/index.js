@@ -13,21 +13,20 @@ router.get('/home', function(req, res, next) {
   });
 });
 
-
+var results = [];
 router.get('/scrape/:searchParam', function(req, res, callback) {
 
   urls = ['http://www.amazon.com/s/ref=nb_sb_ss_c_0_9?url=search-alias%3Daps&field-keywords=' + req.params.searchParam,
     'http://www.ebay.com/sch/i.html?_from=R40&_trksid=p2050601.m570.l1311.R1.TR12.TRC2.A0.H0.Xwact.TRS0&_nkw=' + req.params.searchParam
   ];
   console.log(getData(urls, middleFunc));
-  res.json(getData(urls, middleFunc));
+  res.json(results);
   
 
 });
 
 function middleFunc(objs){
-  console.log('callback ' + objs);
-  return objs;
+  results = objs;
 }
 
 function getData(urls, callback){
