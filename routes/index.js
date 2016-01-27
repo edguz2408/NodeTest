@@ -34,7 +34,7 @@ router.get('/scrape/:searchParam', function(req, res, next) {
 
 });
 
-function middleFunc(objs, res, i){
+function middleFunc(objs, res){
   console.log('callback::' + objs);
   res.header('Something', 'else');
   res.json(objs);
@@ -93,7 +93,7 @@ function getData(urls, res, callback){
     console.log('results1:: ' + objs);
   }
    console.log('results:: ' + objs);
-   callback(objs, res, i);
+   callback(objs, res);
   //console.log(result);
   
   //res.end(objs);
