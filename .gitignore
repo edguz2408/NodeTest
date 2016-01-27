@@ -29,5 +29,7 @@ node_modules
 # Optional npm cache directory
 .npm
 
+../output.json
+
 # Optional REPL history
 .node_repl_history
