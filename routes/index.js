@@ -26,7 +26,7 @@ router.get('/scrape/:searchParam', function(req, res, callback) {
 });
 
 function middleFunc(objs){
-  console.log(objs);
+  console.log('callback ' + objs);
   return objs;
 }
 
@@ -77,6 +77,7 @@ function getData(urls, callback){
         });
 
       }
+      console.log('results:: ' + objs);
       callback(objs);
     });
   }
