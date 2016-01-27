@@ -22,20 +22,6 @@ router.get('/scrape/:searchParam', function(req, res, next) {
     'http://www.ebay.com/sch/i.html?_from=R40&_trksid=p2050601.m570.l1311.R1.TR12.TRC2.A0.H0.Xwact.TRS0&_nkw=' + req.params.searchParam
   ];
   
-    getData(urls, res, middleFunc);
-    console.log(results);
-   
-
-});
-
-function middleFunc(objs, res){
-  console.log('callback::' + objs);
-  res.json(objs);
-}
-
-function getData(urls, res, callback){
-
-  //for (i = 0; i < urls.length; i++) {
     request(urls[0], function(error, response, html) {
       if (!error) {
         var $ = cheerio.load(html);
@@ -84,15 +70,11 @@ function getData(urls, res, callback){
       }
         
     });
-    console.log('results1:: ' + objs);
-  //}
-   console.log('results:: ' + objs);
    
-  //console.log(result);
-  
-  //res.end(objs);
-  
-}
+
+});
+
+
 
 
 module.exports = router;
