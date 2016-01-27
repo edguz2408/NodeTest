@@ -23,10 +23,10 @@ router.get('/scrape/:searchParam', function(req, res, next) {
   ];
   
   //setInterval(function(){
-    res.setHeader('Last-Modified', (new Date()).toUTCString());
+   
     getData(urls, res, middleFunc);
     console.log(results);
-    next(); 
+   
     
     //res.json(results); 
     
@@ -36,6 +36,7 @@ router.get('/scrape/:searchParam', function(req, res, next) {
 
 function middleFunc(objs, res, i){
   console.log('callback::' + objs);
+  res.header('Something', 'else');
   res.json(objs);
 }
 
