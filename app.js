@@ -56,6 +56,5 @@ app.use(function(err, req, res, next) {
   });
 });
 
-app.listen(3000, '45.55.71.58');
+//app.listen(3000, '45.55.71.58');
 module.exports = app;
-
