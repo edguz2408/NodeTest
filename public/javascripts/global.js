@@ -8,12 +8,16 @@ $(document).ready(function() {
 function search() {
 
   var searchVal = $('#inputSearch').val();
+   var urls = ['http://www.amazon.com/s/ref=nb_sb_ss_c_0_9?url=search-alias%3Daps&field-keywords=' + searchVal,
+    'http://www.ebay.com/sch/i.html?_from=R40&_trksid=p2050601.m570.l1311.R1.TR12.TRC2.A0.H0.Xwact.TRS0&_nkw=' + searchVal
+  ];
+  var tableContent = '';
 
-  $.ajax({
+$.each(urls, function(i, url) {
+    $.ajax({
     type: "GET",
-    url: "/scrape/" + searchVal
+    url: "/scrape/" + url
   }).done(function(response) {
-    var tableContent = '';
 
     $.each(response, function() {
 
@@ -26,9 +30,11 @@ function search() {
       }
 
     });
-    $('#tableDiv table tbody').html(tableContent);
-    //console.log(tableContent);
 
   });
+  
+});
+
+ $('#tableDiv table tbody').html(tableContent);
 
 }
