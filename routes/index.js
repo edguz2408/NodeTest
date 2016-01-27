@@ -28,6 +28,7 @@ router.get('/scrape/:searchParam', function(req, res) {
 function middleFunc(objs){
   console.log('callback::' + objs);
   results = objs;
+  console.log('results callback:: ' + results);
 }
 
 function getData(urls, callback){
