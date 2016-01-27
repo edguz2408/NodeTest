@@ -13,12 +13,11 @@ router.get('/home', function(req, res, next) {
   });
 });
 
-var results = [];
 
-  
 router.get('/scrape/:url', function(req, res) {
-  
-    request(req.params.url, function(error, response, html) {
+    var url = req.params.url;
+    console.log(url);
+    request(url, function(error, response, html) {
       if (!error) {
         var $ = cheerio.load(html);
         
