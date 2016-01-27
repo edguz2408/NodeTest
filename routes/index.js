@@ -87,7 +87,7 @@ function getData(urls, res, callback){
       }
       console.log('results:: ' + objs);
       console.log(i);
-      console.log(url.length);
+      console.log(urls.length);
       if(i === urls.length)
         callback(objs, res, i);
     });
