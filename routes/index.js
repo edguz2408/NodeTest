@@ -14,12 +14,23 @@ router.get('/home', function(req, res, next) {
 });
 
 
-router.get('/scrape/:searchParam', function(req, res) {
+router.get('/scrape/:searchParam', function(req, res, callback) {
 
   urls = ['http://www.amazon.com/s/ref=nb_sb_ss_c_0_9?url=search-alias%3Daps&field-keywords=' + req.params.searchParam,
     'http://www.ebay.com/sch/i.html?_from=R40&_trksid=p2050601.m570.l1311.R1.TR12.TRC2.A0.H0.Xwact.TRS0&_nkw=' + req.params.searchParam
   ];
+  
+  res.send(getData(urls, middleFunc));
+  
 
+});
+
+function middleFunc(objs){
+  return objs;
+}
+
+function getData(urls, callback){
+  
   var objs = [];
   var title, price, url;
 
@@ -27,12 +38,7 @@ router.get('/scrape/:searchParam', function(req, res) {
     request(urls, function(error, response, html) {
       if (!error) {
         var $ = cheerio.load(html);
-
-        //var json = { title : "", price : ""};
-        //var complete = false;
-
-        //res.send(html);
-
+      
         $('.s-item-container').each(function(i, element) {
           var data = $(element);
 
@@ -69,27 +75,16 @@ router.get('/scrape/:searchParam', function(req, res) {
 
         });
 
-
       }
-
-      /*fs.writeFile('output.json', JSON.stringify(objs, null, 4), function(err) {
-        console.log('File successfully written! - Check your project directory for the output.json file');
-      })*/
-
-    //  console.log(objs);
-
-
-      //res.json(objs);
-
+      callback(objs);
     });
   }
 
   //console.log(result);
-  res.json(result);
+  
   //res.end(objs);
-
-
-});
+  
+}
 
 
 module.exports = router;
