@@ -33,7 +33,7 @@ router.get('/scrape/:searchParam', function(req, res) {
 
 function middleFunc(objs, res, i){
   console.log('callback::' + objs);
-  res.write(objs);
+  res.write(JSON.stringify(objs));
   
 }
 
