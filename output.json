@@ -1,5 +1,6 @@
 [
     {
+<<<<<<< HEAD
         "title": "AmazonBasics High-Speed HDMI Cable - 6.5 Feet (2 Meters) Supports Ethernet, 3D, 4K and Audio Return",
         "price": "$5.49"
     },
@@ -62,5 +63,69 @@
     {
         "title": "AmazonBasics High-Speed HDMI Cable - 25 Feet (Latest Standard)",
         "price": "$13.99"
+=======
+        "title": "Call of Duty 4: Modern Warfare - Playstation 3",
+        "price": "$22.99"
+    },
+    {
+        "title": "Call of Duty: Modern Warfare 2 - Playstation 3",
+        "price": "$12.72"
+    },
+    {
+        "title": "Call of Duty: Modern Warfare 3 - Playstation 3",
+        "price": "$15.72"
+    },
+    {
+        "title": "Call of Duty: Modern Warfare 3 with DLC Collection 1 - Playstation 3",
+        "price": "$15.20"
+    },
+    {
+        "title": "Call of Duty 4: Modern Warfare - Game of the Year Edition",
+        "price": "$13.19"
+    },
+    {
+        "title": "Call of Duty 4: Modern Warfare - Game of the Year Edition",
+        "price": "$13.19"
+    },
+    {
+        "title": "Call of Duty: Advanced Warfare (Gold Edition) - PlayStation 3",
+        "price": "$30.39"
+    },
+    {
+        "title": "Call of Duty: Modern Warfare 2 Greatest Hits with DLC - Playstation 3",
+        "price": "$18.50"
+    },
+    {
+        "title": "Call of Duty: Advanced Warfare - Xbox One",
+        "price": "$27.00"
+    },
+    {
+        "title": "Playstation 3 320GB HW Bundle - Call of Duty: Modern Warfare 3",
+        "price": "$452.91"
+    },
+    {
+        "title": "Call of Duty: Modern Warfare 3 Hardened Edition",
+        "price": "$78.98"
+    },
+    {
+        "title": "Call of Duty: Advanced Warfare Atlas Pro Edition - PlayStation 3",
+        "price": "$41.24"
+    },
+    {
+        "title": "Call of Duty: Modern Warfare 3 Hardened Edition",
+        "price": "$118.75"
+    },
+    {
+        "title": "Call of Duty: Modern Warfare 2 Hardened Edition - Playstation 3",
+        "price": "$9.48"
+    },
+    {
+        "title": "Call of Duty: Modern Warfare 2 Prestige Edition",
+        "price": "$339.88"
+    },
+    {
+        "title": "Call of Duty Advanced Warfare - Day Zero Edition",
+        "price": "$21.99"
+>>>>>>> 777ff78da89d25dd392043c1b20b34e466d2bacf
     }
 ]
