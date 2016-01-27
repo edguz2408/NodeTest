@@ -23,7 +23,7 @@ router.get('/scrape/:searchParam', function(req, res) {
   ];
   
   //setInterval(function(){
-    getData(urls, middleFunc, res);
+    getData(urls, res, middleFunc);
     console.log(results);
     //res.json(results); 
     
