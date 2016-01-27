@@ -22,10 +22,12 @@ router.get('/scrape/:searchParam', function(req, res) {
     'http://www.ebay.com/sch/i.html?_from=R40&_trksid=p2050601.m570.l1311.R1.TR12.TRC2.A0.H0.Xwact.TRS0&_nkw=' + req.params.searchParam
   ];
   
-  results = getData(urls, middleFunc);
-  console.log(results);
-  res.json(results);
-  
+  setInterval(function(){
+     results = getData(urls, middleFunc);
+    console.log(results);
+    res.json(results); 
+    
+  }, 10000);
 
 });
 
