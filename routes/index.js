@@ -14,58 +14,86 @@ router.get('/home', function(req, res, next) {
 });
 
 
-router.get('/scrape/:url', function(req, res) {
-    var url = req.params.url;
-    console.log(url);
-    request(url, function(error, response, html) {
-      if (!error) {
-        var $ = cheerio.load(html);
+router.get('/scrape/:searchVal', function(req, res) {
+
+  var values = String(req.params.searchVal).split(',');
+  var search = values[0];
+  var index = parseInt(values[1]);
+  var urls = ['http://www.amazon.com/s/ref=nb_sb_ss_c_0_9?url=search-alias%3Daps&field-keywords=' + search,
+    'http://www.ebay.com/sch/i.html?_from=R40&_trksid=p2050601.m570.l1311.R1.TR12.TRC2.A0.H0.Xwact.TRS0&_nkw=' + search
+  ];
+
+  console.log(search);
+  console.log(index);
+  console.log(urls[index]);
+
+  request(urls[index], function(error, response, html) {
+    if (!error) {
+
+      var $ = cheerio.load(html);
+
+      var objs = [];
+      var title, price, url, image;
+
+      $('li.s-result-item').each(function(i, element) {
+        var data = $(element);
+
+        if (data.find('h2.s-access-title').length > 0)
+          title = data.find('h2.s-access-title').text();
+
+        if (data.find('span.a-color-price').length > 0)
+          price = data.find('span.a-color-price').eq(0).text();
+
+        if (data.find('a.a-link-normal').length > 0){
+          url = data.find('a.a-link-normal').attr('href');
+        }
+        image = data.find('img.s-access-image').attr('srcset');
         
-        var objs = [];
-        var title, price, url;
-        
-        $('.s-item-container').each(function(i, element) {
-          var data = $(element);
-
-          if (data.find('h2.s-access-title').length > 0)
-            title = data.find('h2.s-access-title').text();
-
-          if (data.find('span.a-color-price').length > 0)
-            price = data.find('span.a-color-price').eq(0).text();
-
-          if (data.find('a.a-link-normal').length > 0)
-            url = data.find('a.a-link-normal').attr('href');
-
-
-          objs.push({
-            'title': title,
-            'price': price,
-            'url': url
-          });
-
-
+        objs.push({
+          'title': title,
+          'price': price,
+          'url': url,
+          'website': 'Amazon',
+          'image': image
         });
 
-        $('.sresult').each(function(i, element) {
-          var data = $(element);
 
-          if (data.find('a.vip').length > 0)
-            title = data.find('a.vip').text();
+      });
 
-          objs.push({
-            'title': title,
-            'price': 0,
-            'url': 'N/A'
-          });
+      $('li.sresult').each(function(i, element) {
+        var data = $(element);
 
+        if (data.find('a.vip').length > 0){
+          title = data.find('a.vip').text();
+          url = data.find('a.vip').attr('href');
+        }
+
+
+        if(data.find('li.lvprice')){
+          $('li.lvprice').find('div.medprc').remove();
+          price = data.find('li.lvprice span.bold').eq(0).text();
+        }
+
+        if(data.find('a img.img').length > 0){
+          image = data.find('img.img').attr('src');
+        }
+
+        objs.push({
+          'title': title,
+          'price': price,
+          'url': url,
+          'website': 'eBay',
+          'image': image
         });
-        
-        res.json(objs);
 
-      }
-        
-    });
-   
+      });
+
+      res.json(objs);
+
+    }
+
+  });
+
 
 });
 
