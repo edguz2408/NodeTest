@@ -1,5 +1,69 @@
 [
     {
+<<<<<<< HEAD
+        "title": "AmazonBasics High-Speed HDMI Cable - 6.5 Feet (2 Meters) Supports Ethernet, 3D, 4K and Audio Return",
+        "price": "$5.49"
+    },
+    {
+        "title": "AmazonBasics High-Speed HDMI Cable - 3 Feet (0.9 Meter) Supports Ethernet, 3D, 4K and Audio Return",
+        "price": "$5.09"
+    },
+    {
+        "title": "AmazonBasics High-Speed HDMI Cable - 10 Feet (Latest Standard)",
+        "price": "$6.99"
+    },
+    {
+        "title": "AmazonBasics High-Speed HDMI Cable - 9.8 Feet (3 Meters) Supports Ethernet, 3D, 4K and Audio Return",
+        "price": "$6.49"
+    },
+    {
+        "title": "HDMI High Speed Cable (6 Feet)",
+        "price": "$3.99$0.01$0.95"
+    },
+    {
+        "title": "AmazonBasics High-Speed HDMI Cable - 25 Feet (7.6 Meters) Supports Ethernet, 3D, 4K and Audio Return",
+        "price": "$13.24"
+    },
+    {
+        "title": "Twisted Veins Two (2) Pack of (6 ft) High Speed HDMI Cables + Right Angle Adapter and Velcro Cable Ties (Latest...",
+        "price": "$7.96$7.96"
+    },
+    {
+        "title": "Mediabridge FLEX Series HDMI Cable (6 Feet) - High-Speed Supports 4K, Ethernet, 3D and Audio Return [Newest Standard...",
+        "price": "$9.99"
+    },
+    {
+        "title": "AmazonBasics High-Speed HDMI Cable 2-Pack - 9.8 Feet (3 Meters) Supports Ethernet, 3D, 4K and Audio Return",
+        "price": "$9.49"
+    },
+    {
+        "title": "Twisted Veins Three (3) Pack of (3 ft) High Speed HDMI Cables + Right Angle Adapter and Velcro Cable Ties (Latest...",
+        "price": "$8.96"
+    },
+    {
+        "title": "AmazonBasics High-Speed HDMI Cable - 6 Feet (Latest Standard)",
+        "price": "$5.99"
+    },
+    {
+        "title": "Mediabridge FLEX Series HDMI Cable (10 Feet) - High-Speed Supports 4K, Ethernet, 3D and Audio Return [Newest Standard...",
+        "price": "$11.99$11.99"
+    },
+    {
+        "title": "AmazonBasics High-Speed HDMI Cable - 15 Feet (4.6 Meters) Supports Ethernet, 3D, 4K and Audio Return",
+        "price": "$11.99"
+    },
+    {
+        "title": "AmazonBasics High-Speed HDMI Cable - 3 Feet (Latest Standard)",
+        "price": "$5.49"
+    },
+    {
+        "title": "AmazonBasics High-Speed HDMI Cable 2-Pack - 6.5 Feet (2 Meters) Supports Ethernet, 3D, 4K and Audio Return",
+        "price": "$7.99"
+    },
+    {
+        "title": "AmazonBasics High-Speed HDMI Cable - 25 Feet (Latest Standard)",
+        "price": "$13.99"
+=======
         "title": "Call of Duty 4: Modern Warfare - Playstation 3",
         "price": "$22.99"
     },
@@ -62,5 +126,6 @@
     {
         "title": "Call of Duty Advanced Warfare - Day Zero Edition",
         "price": "$21.99"
+>>>>>>> 777ff78da89d25dd392043c1b20b34e466d2bacf
     }
 ]
