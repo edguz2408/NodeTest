@@ -1,6 +1,6 @@
 $(document).ready(function() {
   console.log('Ready!');
-
+  $('#tableDiv').hide();
   $('#content').on('click', '#btnSearch', search);
 
 });
@@ -44,6 +44,7 @@ $.each(urls, function(i, url) {
       }
 
     });
+    $('#tableDiv').show();
     $('#tableDiv table tbody').html(tableContent);
     console.log(tableContent);
 
