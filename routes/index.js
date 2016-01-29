@@ -3,16 +3,35 @@ var router = express.Router();
 var fs = require('fs');
 var request = require('request');
 var cheerio = require('cheerio');
+var aws = require("aws-lib");
 
 
 
 /* GET home page. */
 router.get('/home', function(req, res, next) {
+  amazon();
   res.render('index', {
     title: 'Express'
   });
 });
 
+function amazon(keywords) {
+  var prodAdv = aws.createProdAdvClient('AKIAJ52XGI37HZLUCGVQ', 'f13XFjpExe67oYqoMtuMq8lfNyzbABag3XM9d6gL', 'jlopezseguros-20');
+  var searchParam = 'All';
+  var options = {SearchIndex: searchParam, Keywords : keywords};
+  console.log(keywords);
+  prodAdv.call("ItemSearch", options, function(err, result){
+    //console.log(result.Items.Item[0]);
+    return(result);
+  });
+}
+
+router.get('/amazon/:searchVal', function(req, res) {
+  var param = req.params.searchVal;
+  console.log(amazon(param));
+  res.json(amazon(param));
+
+});
 
 router.get('/scrape/:searchVal', function(req, res) {
 
@@ -48,7 +67,7 @@ router.get('/scrape/:searchVal', function(req, res) {
           url = data.find('a.a-link-normal').attr('href');
         }
         image = data.find('img.s-access-image').attr('srcset');
-        
+
         objs.push({
           'title': title,
           'price': price,
