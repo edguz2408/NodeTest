@@ -46,12 +46,24 @@ $.each(urls, function(i, url) {
     });
     $('#tableDiv').show();
     $('#tableDiv table tbody').html(tableContent);
-    console.log(tableContent);
+    //console.log(tableContent);
 
   });
 
 });
 
+ searchAmazon();
 
+}
+
+function searchAmazon(){
+  var searchVal = $('#inputSearch').val();
+
+  $.ajax({
+    type:"GET",
+    url : '/amazon/' + searchVal
+  }).done(function(response){
+    console.log('Amazon API::' + response);
+  });
 
 }
