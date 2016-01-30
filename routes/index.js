@@ -5,12 +5,12 @@ var request = require('request');
 var cheerio = require('cheerio');
 var aws = require("aws-lib");
 var util = require('util');
-var OperationHelper = require('apac').OperationHelper;
+//var OperationHelper = require('apac').OperationHelper;
 
 
 /* GET home page. */
 router.get('/home', function(req, res, next) {
- // amazon();
+  // amazon();
   res.render('index', {
     title: 'Express'
   });
@@ -19,65 +19,36 @@ router.get('/home', function(req, res, next) {
 function amazon(keywords) {
   var prodAdv = aws.createProdAdvClient('AKIAJ52XGI37HZLUCGVQ', 'f13XFjpExe67oYqoMtuMq8lfNyzbABag3XM9d6gL', 'jlopezseguros-20');
   var searchParam = 'All';
-  var options = {SearchIndex: searchParam, Keywords : keywords};
+  var options = {
+    SearchIndex: searchParam,
+    Keywords: keywords
+  };
   console.log(keywords);
-  prodAdv.call("ItemSearch", options, function(err, result){
+  prodAdv.call("ItemSearch", options, function(err, result) {
     //console.log(result.Items.Item[0]);
-    return(result);
+    return (result);
   });
 }
 
 router.get('/amazon/:searchVal', function(req, res) {
 
- /* var keywords = req.params.searchVal;
-  var opHelper = new OperationHelper({
-	awsId : 'AKIAJ52XGI37HZLUCGVQ',
-	awsSecret: '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',
-	assocId: 'jlopezseguros-20'
-  });
-  
-  opHelper.execute('ItemSearch', {
-	'SearchIndex': 'All',
-	'Keywords': keywords,
-	'ResponseGroup': 'ItemAttributes,Offers'
-  }, function(err, result) {
-     	console.log(result.Items);
-        res.send(result);
-     
-  });*/
-
   var param = req.params.searchVal;
-  var prodAdv =  aws.createProdAdvClient('AKIAJ52XGI37HZLUCGVQ', 'f13XFjpExe67oYqoMtuMq8lfNyzbABag3XM9d6gL', 'jlopezseguros-20');
-  var searchParam = 'All'; 
+  var prodAdv = aws.createProdAdvClient('AKIAJ52XGI37HZLUCGVQ', 'f13XFjpExe67oYqoMtuMq8lfNyzbABag3XM9d6gL', 'jlopezseguros-20');
+  var searchParam = 'All';
   var keywords = param;
-  var options = {SearchIndex: searchParam, Keywords : keywords, ResponseGroup: 'ItemAttributes,Offers,Images'};
+  var options = {
+    SearchIndex: searchParam,
+    Keywords: keywords,
+    ResponseGroup: 'ItemAttributes,Offers,Images'
+  };
   //var results = [];
 
-  prodAdv.call("ItemSearch", options, function(err, result){
-	console.log(result.Items.Item[0].ASIN);
-  	res.send(result);
-	//var results = [];
-//	for(var item in result.Items.Item){
-//		console.log('Item::' +item);
-//		console.log('ASIN::'+item.ASIN);
-		//var itemOptions = {IdType: "ASIN", ItemId: result.Items.Item[0].ASIN};
-		
-		//prodAdv.call("ItemLookup", itemOptions, function(err, ItemResult){
-			//console.log('Result::' + item );
-			//console.log(ItemResult);
-			//res.send(ItemResult);
-			//results.push(ItemResult);
-			
-		//});
-	});
-	//}
-	//console.log('Results::' + results);
-	//res.send(results);*/
+  prodAdv.call("ItemSearch", options, function(err, result) {
+    //console.log(result.Items.Item[0].ASIN);
+    res.send(result);
   });
 
- 
-
-//});
+});
 
 router.get('/scrape/:searchVal', function(req, res) {
 
@@ -109,7 +80,7 @@ router.get('/scrape/:searchVal', function(req, res) {
         if (data.find('span.a-color-price').length > 0)
           price = data.find('span.a-color-price').eq(0).text();
 
-        if (data.find('a.a-link-normal').length > 0){
+        if (data.find('a.a-link-normal').length > 0) {
           url = data.find('a.a-link-normal').attr('href');
         }
         image = data.find('img.s-access-image').attr('srcset');
@@ -128,18 +99,18 @@ router.get('/scrape/:searchVal', function(req, res) {
       $('li.sresult').each(function(i, element) {
         var data = $(element);
 
-        if (data.find('a.vip').length > 0){
+        if (data.find('a.vip').length > 0) {
           title = data.find('a.vip').text();
           url = data.find('a.vip').attr('href');
         }
 
 
-        if(data.find('li.lvprice')){
+        if (data.find('li.lvprice')) {
           $('li.lvprice').find('div.medprc').remove();
           price = data.find('li.lvprice span.bold').eq(0).text();
         }
 
-        if(data.find('a img.img').length > 0){
+        if (data.find('a img.img').length > 0) {
           image = data.find('img.img').attr('src');
         }
 
