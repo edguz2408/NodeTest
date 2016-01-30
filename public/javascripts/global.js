@@ -1,7 +1,7 @@
 $(document).ready(function() {
   console.log('Ready!');
   $('#tableDiv').hide();
-  $('#content').on('click', '#btnSearch', search);
+  $('#content').on('click', '#btnSearch', searchAmazon);
 
 });
 
@@ -58,12 +58,26 @@ $.each(urls, function(i, url) {
 
 function searchAmazon(){
   var searchVal = $('#inputSearch').val();
-
+  var tableContent = '';
   $.ajax({
     type:"GET",
     url : '/amazon/' + searchVal
   }).done(function(response){
-    console.log('Amazon API::' + response);
+   //  console.log(response);
+ //    console.log(response.Items.Item[0].OfferSummary.LowestNewPrice.FormattedPrice);
+     $.each(response.Items.Item, function(i, item){
+	 console.log(item);
+     	 tableContent += '<tr>';
+	 tableContent += '<td><img src="' + item.MediumImage.URL + '"/></td>';
+	 tableContent += '<td>' + item.ItemAttributes.Title + '</td>';         
+        tableContent += '<td>' + item.OfferSummary.LowestNewPrice.FormattedPrice + '</td>';
+         tableContent += '<td><a href="' + item.DetailPageURL + '">View Item</a></td>';
+	 tableContent += '</tr>';
+     });
+
+     $('#tableDiv').show();
+     $('#tableDiv table tbody').html(tableContent);
+
   });
 
 }
