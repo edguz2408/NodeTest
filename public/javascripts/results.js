@@ -47,9 +47,9 @@ function doSearch(searchVal) {
   //Cleaning results table for new searches
   $('#tableDiv table tbody tr').remove();
 
-  searchAmazon(searchVal);
+ /* searchAmazon(searchVal);
   searcheBay(searchVal);
-  searchBestBuy(searchVal);
+  searchBestBuy(searchVal);*/
 
 
   if ($('#chbxShoes').prop('checked')) {
@@ -71,13 +71,13 @@ function search(searchVal) {
     }).done(function(response) {
 
       $.each(response, function(index, item) {
-        //console.log(response);
+	console.log(parseInt(String(item.price).split('$')[1]));
         if (index <= 10) {
           objects.push({
             title: item.title,
             url: item.url,
             imageUrl: item.image,
-            price: item.price,
+            price: parseInt(String(item.price).split('$')[1]),
             website: item.website
 
           });
