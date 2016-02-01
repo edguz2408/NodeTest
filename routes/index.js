@@ -16,12 +16,21 @@ router.get('/home', function(req, res, next) {
   });
 });
 
+router.get('/results/', function(req, res){
+  var searchVal = req.body.inputSearch;
+  console.log(searchVal);
+  res.render('results', {
+    searchParam : searchVal
+  });
+});
+
 function amazon(keywords) {
   var prodAdv = aws.createProdAdvClient('AKIAJ52XGI37HZLUCGVQ', 'f13XFjpExe67oYqoMtuMq8lfNyzbABag3XM9d6gL', 'jlopezseguros-20');
   var searchParam = 'All';
   var options = {
     SearchIndex: searchParam,
-    Keywords: keywords
+    Keywords: keywords,
+    Title: keywords
   };
   console.log(keywords);
   prodAdv.call("ItemSearch", options, function(err, result) {
@@ -39,7 +48,8 @@ router.get('/amazon/:searchVal', function(req, res) {
   var options = {
     SearchIndex: searchParam,
     Keywords: keywords,
-    ResponseGroup: 'ItemAttributes,Offers,Images'
+    ResponseGroup: 'ItemAttributes,Offers,Images',
+    VariationPage: 1
   };
   //var results = [];
 
@@ -53,85 +63,112 @@ router.get('/amazon/:searchVal', function(req, res) {
 router.get('/scrape/:searchVal', function(req, res) {
 
   var values = String(req.params.searchVal).split(',');
-  var search = values[0];
-  var index = parseInt(values[1]);
-  var urls = ['http://www.amazon.com/s/ref=nb_sb_ss_c_0_9?url=search-alias%3Daps&field-keywords=' + search,
-    'http://www.ebay.com/sch/i.html?_from=R40&_trksid=p2050601.m570.l1311.R1.TR12.TRC2.A0.H0.Xwact.TRS0&_nkw=' + search
-  ];
+  var search = values[0];;
+  var index = values[1];
 
-  console.log(search);
-  console.log(index);
-  console.log(urls[index]);
+  var url;
+  var containerClass;
+  var priceClass;
+  var titleClass;
+  var urlClass;
+  var imageClass;
+  var productClass;
 
-  request(urls[index], function(error, response, html) {
+  switch (index) {
+    case '6pm':
+      url = 'http://www.6pm.com/' + search;
+      containerClass = '.product';
+      priceClass = 'span.price-6pm';
+      titleClass = 'span.brandName';
+      urlClass = '.product';
+      imageClass = 'img.productImg';
+      productClass = 'span.productName'
+      break;
+   case 'Swappa':
+     url = 'https://swappa.com/search?q=' + search;
+     containerClass = '.search_device_cell';
+     priceClass = 'div.buttons a.btn-default';
+     titleClass = 'div.title';
+     urlClass = 'div.title a';
+     imageClass = 'div.image img';
+     break;
+
+  }
+
+
+  var object = {url: url, container: containerClass,
+                price: priceClass, title: titleClass,
+                url: urlClass, image: imageClass,
+                res: res, scrape: url, product: productClass
+              };
+
+
+  scrape(object);
+
+
+});
+
+function scrape(object){
+
+
+
+  request(object.scrape, function(error, response, html) {
     if (!error) {
 
       var $ = cheerio.load(html);
 
       var objs = [];
-      var title, price, url, image;
+      var title, price, url, image, website;
+      var partialUrl = String(object.scrape).split('com/');
+      console.log(partialUrl);
 
-      $('li.s-result-item').each(function(i, element) {
+      $(object.container).each(function(i, element) {
         var data = $(element);
 
-        if (data.find('h2.s-access-title').length > 0)
-          title = data.find('h2.s-access-title').text();
+        if (data.find(object.title).length > 0){
+          title = data.find(object.title).text();
+          if(object.product != undefined){
+            title += '-'
+            title += data.find(object.product).text();
+          }
 
-        if (data.find('span.a-color-price').length > 0)
-          price = data.find('span.a-color-price').eq(0).text();
-
-        if (data.find('a.a-link-normal').length > 0) {
-          url = data.find('a.a-link-normal').attr('href');
         }
-        image = data.find('img.s-access-image').attr('srcset');
 
-        objs.push({
-          'title': title,
-          'price': price,
-          'url': url,
-          'website': 'Amazon',
-          'image': image
-        });
+        if (data.find(object.price).length > 0)
+          price = data.find(object.price).text();
 
+
+        if(data.attr('href') != undefined){
+          //6pm
+          url = partialUrl[0] + 'com/' + data.attr('href');
+          website = '6pm';
+        }else{
+          //Swappa
+          url = partialUrl[0] + 'com/' + data.find(object.url).attr('href');
+          website = 'Swappa';
+        }
+
+        image = data.find(object.image).attr('src');
+
+        if(price != undefined){
+          objs.push({
+            'title': title,
+            'price': price,
+            'url': url,
+            'website': website,
+            'image': image
+          });
+        }
 
       });
 
-      $('li.sresult').each(function(i, element) {
-        var data = $(element);
-
-        if (data.find('a.vip').length > 0) {
-          title = data.find('a.vip').text();
-          url = data.find('a.vip').attr('href');
-        }
-
-
-        if (data.find('li.lvprice')) {
-          $('li.lvprice').find('div.medprc').remove();
-          price = data.find('li.lvprice span.bold').eq(0).text();
-        }
-
-        if (data.find('a img.img').length > 0) {
-          image = data.find('img.img').attr('src');
-        }
-
-        objs.push({
-          'title': title,
-          'price': price,
-          'url': url,
-          'website': 'eBay',
-          'image': image
-        });
-
-      });
-
-      res.json(objs);
+      object.res.json(objs);
 
     }
 
   });
 
-
-});
+}
 
 
 

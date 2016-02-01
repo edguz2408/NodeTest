@@ -1,29 +1,48 @@
-$(document).foundation();
+
+var objects = [];
 
 $(document).ready(function() {
-  /*console.log('Ready!');
+
+
+  console.log('Ready!');
   $('#tableDiv').hide();
-  $('#content').on('click', '#btnSearch', doSearch);
+
 
   var currentLocation = window.location.href;
-  if(currentLocation.indexOf('results')){
-    console.log(currentLocation);
-    console.log(String(currentLocation).split('/'));
-    var searchVal = String(currentLocation).split('/')[4];
 
-    searchAmazon(searchVal);
-    searcheBay(searchVal);
-    searchBestBuy(searchVal);
-    search(searchVal);
-  }*/
+  console.log(currentLocation);
+  console.log(String(currentLocation).split('='));
+  var searchVal = String(currentLocation).split('=')[1];
 
+  doSearch(searchVal);
+
+  /*$('#content').on('click', function(){
+    var searchVal = $('#inputSearch').val();
+    console.log(searchVal);
+    doSearch(searchVal);
+  });*/
 
 });
 
-/*function doSearch(searchVal) {
+function predicatBy(prop){
+   return function(a,b){
+      if( parseInt(a[prop]) > parseInt(b[prop])){
+          return 1;
+      }else if( parseInt(a[prop]) < parseInt(b[prop]) ){
+          return -1;
+      }
+      return 0;
+   }
+}
+
+//Usage
+//yourArray.sort( predicatBy("age") );
+
+
+function doSearch(searchVal) {
   console.log('clicked');
 
-  window.location.href="/results/" + searchVal;
+  //window.location.href = "/results/" + searchVal;
   console.log('Test!');
   //Cleaning results table for new searches
   $('#tableDiv table tbody tr').remove();
@@ -33,7 +52,7 @@ $(document).ready(function() {
   searchBestBuy(searchVal);
 
 
-  if($('#chbxShoes').prop('checked')){
+  if ($('#chbxShoes').prop('checked')) {
     search(searchVal + ' shoes');
   } else {
     search(searchVal);
@@ -44,7 +63,6 @@ function search(searchVal) {
 
   var spans = '';
   var urls = ['6pm', 'Swappa'];
-  var objects = [];
 
   $.each(urls, function(i, url) {
     $.ajax({
@@ -77,6 +95,11 @@ function search(searchVal) {
 function completeTable(objects) {
 
   if (objects.length > 0) {
+
+
+    console.log(objects.sort( predicatBy("price") ));
+
+
     var spans = '';
     //console.log(objects);
     $.each(objects, function(i, item) {
@@ -106,7 +129,9 @@ function completeTable(objects) {
       spans += '</li>';
 
     });
+
     $('#results').append(spans);
+    $('#spanResults').text(' ' + $('#results').children().length);
 
   }
 
@@ -115,7 +140,6 @@ function completeTable(objects) {
 function searchAmazon(searchVal) {
 
   var spans = '';
-  var objects = [];
   var image, title, price, url;
 
   $.ajax({
@@ -178,7 +202,6 @@ function searcheBay(searchVal) {
 
 function showeBayResults(root) {
   var items = root.findItemsByKeywordsResponse[0].searchResult[0].item || [];
-  var objects = [];
 
 
   $.each(items, function(i, item) {
@@ -197,7 +220,7 @@ function showeBayResults(root) {
 function searchBestBuy(searchVal){
 
   var APIKEY = 'pmsvxvvm28xfk7hfqck7rffq';
-  var objects = [];
+
 
   $.ajax({
     type: "GET",
@@ -223,4 +246,4 @@ function searchBestBuy(searchVal){
 
   });
 
-}*/
+}

@@ -1,18 +1,471 @@
 extends layout
- 
+
+doctype html
+//if lt IE 7
+  html.no-js.lt-ie9.lt-ie8.lt-ie7  
+//if IE 7
+  html.no-js.lt-ie9.lt-ie8  
+//if IE 8
+  html.no-js.lt-ie9  
+// [if gt IE 8] <!
+html.no-js
 block content
-  h1 Items Finder
-  
-  #content
-    input#inputSearch(type="text", placeholder="Search")
-    button#btnSearch Search
-  
-  #tableDiv
-    table
-      thead
-        th Image
-        th Title
-        th Price
-        th View Item
-        th Web Site
-      tbody
+  body
+    //if lt IE 7
+      p.chromeframe
+        | You are using an
+        strong outdated
+        | browser. Please
+        a(href="http://browsehappy.com/") upgrade your browser
+        | or
+        a(href="http://www.google.com/chromeframe/?redirect=true") activate Google Chrome Frame
+        | to improve your experience.
+    .page.home
+      header.cf(role="banner")
+        .top-wrap
+          .row
+            .large-3.columns
+              .logo
+                a(href="index.html") Couponizer
+            nav.large-6.columns
+              ul.rr.main-menu
+                li.current
+                  a(href="index.html") Home
+                li
+                  a(href="blog.html") Blog
+                li
+                  a(href="search-results.html") Extra
+                  ul
+                    li
+                      a(href="company.html") Company
+                    li
+                      a(href="404.html") 404 page
+                    li
+                      a(href="no-results.html") No results
+                    li
+                      a(href="search-results.html") Search results
+                li
+                  a(href="coupons.html") Coupons
+                li
+                  a(href="post.html") Post
+            .large-3.columns
+              .account.cf
+                a.input.button.blue.tertiary.icon.plus(href="#") Join us
+                a.input.button.transparent.tertiary(href="#") Log in
+        
+        
+        .search-wrap.stripe-white
+          .row
+            form(action="/results/", method="get")
+              .small-6.large-8.columns
+                label.search-box
+                  input#inputSearch.input.field.primary(type="text", name="searchInput" placeholder="Search listing")
+                  a#clear-sb.icon.clear.ir(href="#") Clear
+              .small-3.large-2.columns
+                input#btnSearch.input.button.primary.red(type="submit", value="Search")
+              nav.small-3.large-2.columns
+                ul.rr.menu-browse
+                  li.input.button.primary
+                    p.label Browse
+                    ul.rr.sub
+                      li
+                        a(href="company.html") Nike
+                      li
+                        a(href="company.html") Ray Ban
+                      li
+                        a(href="company.html") Amazon
+                      li
+                        a(href="company.html") InterSport
+                      li
+                        a(href="company.html") Big Time
+                      li
+                        a(href="company.html") WristWatch
+                      li
+                        a(href="company.html") GoDaddy
+                      li
+                        a(href="company.html") SanDisk
+                      li
+                        a(href="company.html") Nikon
+                      li
+                        a(href="company.html") Canon
+      div(role="main")
+        .stripe-regular.items-carousel-wrap
+          .row
+            .column
+              h2 New Coupons
+          .row.collapse
+            .column
+              .items-carousel.flexslider
+                ul.rr.slides
+                  li(style="width: 240px; float: left; display: block;")
+                    .wrapper-3.item-thumb
+                      .top
+                        figure
+                          img(src="http://teothemes.com/html/Couponizer/img/ph/200x110/1.jpg", alt="")
+                        h2.alt
+                          a(href="#") Cranium Disney Family Edition at Amazon
+                      .bottom
+                        p.value.secondary $30 OFF
+                        h6 31 days left
+                        a.input.button.red.secondary(href="#") Learn more
+                  li(style="width: 240px; float: left; display: block;")
+                    .wrapper-3.item-thumb
+                      .top
+                        figure
+                          img(src="http://teothemes.com/html/Couponizer/img/ph/200x110/1.jpg", alt="")
+                        h2.alt
+                          a(href="#") Popular Marvel Movies Titles on Amazon
+                      .bottom
+                        p.value.secondary $30 OFF
+                        h6 5 days left
+                        a.input.button.red.secondary(href="#") Learn more
+                  li(style="width: 240px; float: left; display: block;")
+                    .wrapper-3.item-thumb
+                      .top
+                        figure
+                          img(src="http://teothemes.com/html/Couponizer/img/ph/200x110/1.jpg", alt="")
+                        h2.alt
+                          a(href="#") GoDaddy yearly hosting offer
+                      .bottom
+                        p.value.secondary $30 OFF
+                        h6 43 days left
+                        a.input.button.red.secondary(href="#") Learn more
+                  li(src="http://teothemes.com/html/Couponizer/img/ph/200x110/1.jpg", alt="")
+                    .wrapper-3.item-thumb
+                      .top
+                        figure
+                          img(src="http://teothemes.com/html/Couponizer/img/ph/200x110/1.jpg", alt="")
+                        h2.alt
+                          a(href="#") InterSport May Orders
+                      .bottom
+                        p.value.secondary $30 OFF
+                        h6 22 days left
+                        a.input.button.red.secondary(href="#") Learn more
+                  li
+                    .wrapper-3.item-thumb
+                      .top
+                        figure
+                          img(src="img/ph/200x110/1.jpg", alt="")
+                        h2.alt
+                          a(href="#") Nikon cameras
+                      .bottom
+                        p.value.secondary $20 OFF
+                        h6 12 days left
+                        a.input.button.red.secondary(href="#") Learn more
+                  li
+                    .wrapper-3.item-thumb
+                      .top
+                        figure
+                          img(src="img/ph/200x110/1.jpg", alt="")
+                        h2.alt
+                          a(href="#") Cranium Disney Family Edition at Amazon
+                      .bottom
+                        p.value.secondary $30 OFF
+                        h6 2 days left
+                        a.input.button.red.secondary(href="#") Learn more
+                  li
+                    .wrapper-3.item-thumb
+                      .top
+                        figure
+                          img(src="img/ph/200x110/2.jpg", alt="")
+                        h2.alt
+                          a(href="#") Popular Marvel Movies Titles on Amazon
+                      .bottom
+                        p.value.secondary $30 OFF
+                        h6 4 days left
+                        a.input.button.red.secondary(href="#") Learn more
+                  li
+                    .wrapper-3.item-thumb
+                      .top
+                        figure
+                          img(src="img/ph/200x110/3.jpg", alt="")
+                        h2.alt
+                          a(href="#") GoDaddy yearly hosting offer
+                      .bottom
+                        p.value.secondary $30 OFF
+                        h6 17 days left
+                        a.input.button.red.secondary(href="#") Learn more
+                  li
+                    .wrapper-3.item-thumb
+                      .top
+                        figure
+                          img(src="img/ph/200x110/4.jpg", alt="")
+                        h2.alt
+                          a(href="#") InterSport May Orders
+                      .bottom
+                        p.value.secondary $30 OFF
+                        h6 12 days left
+                        a.input.button.red.secondary(href="#") Learn more
+                  li
+                    .wrapper-3.item-thumb
+                      .top
+                        figure
+                          img(src="img/ph/200x110/1.jpg", alt="")
+                        h2.alt
+                          a(href="#") Nikon cameras
+                      .bottom
+                        p.value.secondary $20 OFF
+                        h6 25 days left
+                        a.input.button.red.secondary(href="#") Learn more
+        .stripe-white.big.items-carousel-wrap
+          .row
+            .column
+              h2 Popular Coupons
+          .row.collapse
+            .column
+              .items-carousel.flexslider
+                ul.rr.slides
+                  li
+                    .wrapper-3.item-thumb
+                      .top
+                        figure
+                          img(src="img/ph/200x110/1.jpg", alt="")
+                        h2.alt
+                          a(href="#") Sneakers and Athletic Shoes 
+                      .bottom
+                        p.value.secondary $10 OFF
+                        h6 6 days left
+                        a.input.button.red.secondary(href="#") Learn more
+                  li
+                    .wrapper-3.item-thumb
+                      .top
+                        figure
+                          img(src="img/ph/200x110/2.jpg", alt="")
+                        h2.alt
+                          a(href="#") Shirley Temple DVDs at Amazon
+                      .bottom
+                        p.value.secondary 62% OFF
+                        h6 3 days left
+                        a.input.button.red.secondary(href="#") Learn more
+                  li
+                    .wrapper-3.item-thumb
+                      .top
+                        figure
+                          img(src="img/ph/200x110/3.jpg", alt="")
+                        h2.alt
+                          a(href="#") Paper Mario: Sticker Star for Nintendo 3DS
+                      .bottom
+                        p.value.secondary 50% OFF
+                        h6 18 days left
+                        a.input.button.red.secondary(href="#") Learn more
+                  li
+                    .wrapper-3.item-thumb
+                      .top
+                        figure
+                          img(src="img/ph/200x110/4.jpg", alt="")
+                        h2.alt
+                          a(href="#") Canon PowerShot SX150 Digital Camera
+                      .bottom
+                        p.value.secondary $25 OFF
+                        h6 1 day left
+                        a.input.button.red.secondary(href="#") Learn more
+                  li
+                    .wrapper-3.item-thumb
+                      .top
+                        figure
+                          img(src="img/ph/200x110/1.jpg", alt="")
+                        h2.alt
+                          a(href="#") SOUL by Ludacris HD Headphones
+                      .bottom
+                        p.value.secondary 67% OFF
+                        h6 9 days left
+                        a.input.button.red.secondary(href="#") Learn more
+                  li
+                    .wrapper-3.item-thumb
+                      .top
+                        figure
+                          img(src="img/ph/200x110/1.jpg", alt="")
+                        h2.alt
+                          a(href="#") Sneakers and Athletic Shoes 
+                      .bottom
+                        p.value.secondary $10 OFF
+                        h6 22 days left
+                        a.input.button.red.secondary(href="#") Learn more
+                  li
+                    .wrapper-3.item-thumb
+                      .top
+                        figure
+                          img(src="img/ph/200x110/2.jpg", alt="")
+                        h2.alt
+                          a(href="#") Shirley Temple DVDs at Amazon
+                      .bottom
+                        p.value.secondary 62% OFF
+                        h6 5 days left
+                        a.input.button.red.secondary(href="#") Learn more
+                  li
+                    .wrapper-3.item-thumb
+                      .top
+                        figure
+                          img(src="img/ph/200x110/3.jpg", alt="")
+                        h2.alt
+                          a(href="#") Paper Mario: Sticker Star for Nintendo 3DS
+                      .bottom
+                        p.value.secondary 50% OFF
+                        h6 2 days left
+                        a.input.button.red.secondary(href="#") Learn more
+                  li
+                    .wrapper-3.item-thumb
+                      .top
+                        figure
+                          img(src="img/ph/200x110/4.jpg", alt="")
+                        h2.alt
+                          a(href="#") Canon PowerShot SX150 Digital Camera
+                      .bottom
+                        p.value.secondary $25 OFF
+                        h6 28 days left
+                        a.input.button.red.secondary(href="#") Learn more
+                  li
+                    .wrapper-3.item-thumb
+                      .top
+                        figure
+                          img(src="img/ph/200x110/1.jpg", alt="")
+                        h2.alt
+                          a(href="#") SOUL by Ludacris HD Headphones
+                      .bottom
+                        p.value.secondary 67% OFF
+                        h6 12 days left
+                        a.input.button.red.secondary(href="#") Learn more
+        .stripe-regular
+          .row
+            .small-6.large-6.columns
+              .row.collapse
+                .column
+                  .info-box
+                    h2.alt How It Works?
+                    p.text
+                      | Donec suscipit ipsum pulvinar arcu dapibus fermentum. Nam dignissim lobortis justo, vel volutpat mi mattis eu. Integer ut erat purus. Praesent erat massa, tincidunt ac vestibulum ac.
+              .row.collapse
+                .column
+                  .testimonials-box.flexslider
+                    ul.rr.slides
+                      li
+                        .testimonial
+                          .wrapper-5.bubble
+                            p.text.small.rr
+                              | New Styles On Just Reduced Merchandise! Save On Hundreds Of Just Reduced Items And Sign Up With Nike! New Styles On Just Reduced Merchandise!
+                          h5.alt.text-right Rick Martin
+                      li
+                        .testimonial
+                          .wrapper-5.bubble
+                            p.text.small.rr
+                              | bla bla bla
+                          h5.alt.text-right Abraham Lincoln
+            .small-6.large-6.columns
+              .video-box
+                iframe(width="100%", height="100%", src="http://www.youtube.com/embed/GUEZCxBcM78", frameborder="0", allowfullscreen="")
+      footer(role="contentinfo")
+        .newsletter-wrap.stripe-white
+          .row
+            form(action="#")
+              .large-3.columns
+                h3 Newsletter Signup
+              .small-4.large-3.columns
+                input.input.field.primary(type="text", placeholder="Enter Your Name")
+              .small-5.large-4.columns
+                input.input.field.primary(type="text", placeholder="Enter Your E-mail")
+              .small-3.large-2.columns
+                input.input.button.primary.red(type="submit", value="Subscribe")
+        .stripe-regular
+          .row
+            .column
+              h2 Popular Companies
+          .row.collapse
+            .column
+              .popular-companies.flexslider
+                ul.rr.slides
+                  li
+                    a.wrapper-5.small(href="company.html")
+                      img(src="img/ph/130x130/1.jpg", alt="")
+                  li
+                    a.wrapper-5.small(href="company.html")
+                      img(src="img/ph/130x130/2.jpg", alt="")
+                  li
+                    a.wrapper-5.small(href="company.html")
+                      img(src="img/ph/130x130/3.jpg", alt="")
+                  li
+                    a.wrapper-5.small(href="company.html")
+                      img(src="img/ph/130x130/4.jpg", alt="")
+                  li
+                    a.wrapper-5.small(href="company.html")
+                      img(src="img/ph/130x130/1.jpg", alt="")
+                  li
+                    a.wrapper-5.small(href="company.html")
+                      img(src="img/ph/130x130/2.jpg", alt="")
+                  li
+                    a.wrapper-5.small(href="company.html")
+                      img(src="img/ph/130x130/3.jpg", alt="")
+                  li
+                    a.wrapper-5.small(href="company.html")
+                      img(src="img/ph/130x130/4.jpg", alt="")
+                  li
+                    a.wrapper-5.small(href="company.html")
+                      img(src="img/ph/130x130/1.jpg", alt="")
+                  li
+                    a.wrapper-5.small(href="company.html")
+                      img(src="img/ph/130x130/2.jpg", alt="")
+                  li
+                    a.wrapper-5.small(href="company.html")
+                      img(src="img/ph/130x130/3.jpg", alt="")
+                  li
+                    a.wrapper-5.small(href="company.html")
+                      img(src="img/ph/130x130/4.jpg", alt="")
+                  li
+                    a.wrapper-5.small(href="company.html")
+                      img(src="img/ph/130x130/1.jpg", alt="")
+                  li
+                    a.wrapper-5.small(href="company.html")
+                      img(src="img/ph/130x130/2.jpg", alt="")
+                  li
+                    a.wrapper-5.small(href="company.html")
+                      img(src="img/ph/130x130/3.jpg", alt="")
+                  li
+                    a.wrapper-5.small(href="company.html")
+                      img(src="img/ph/130x130/4.jpg", alt="")
+        .stripe-dark.pre-footer-wrap
+          .row
+            .large-4.columns
+              h3.alt About
+              p
+                | Ut sodales ultrices metus, at molestie tellus cursus quis. Cras placerat bibendum quam sed facilisis. Suspendisse dapibus eros eget tellus tempor lacinia. Cras ornare lorem sit amet arcu accumsan ut tristique est fringilla.
+            .small-6.large-4.large-offset-1.columns
+              h3.alt Recent Tweets
+              .tweet
+                p
+                  | Couponizer is a multi-purpose PSD template. Created by #bestwebsoft - hand-made websites from great guys http://t.co/HXvWw
+                a.posted(href="#") posted 5 minutes ago
+            nav.small-6.large-2.large-offset-1.columns
+              h3.alt Menu
+              ul.rr.footer-menu
+                li
+                  a(href="#") Home
+                li
+                  a(href="#") About
+                li
+                  a(href="#") Terms &#38; Conditions
+                li
+                  a(href="#") Privacy Policy
+                li
+                  a(href="#") Jobs
+        .stripe-darker.footer-wrap
+          .row
+            .large-3.columns
+              .logo
+                a(href="#") Couponizer
+            .large-6.columns
+              .copyright
+                | Copyright &#169; 2013, developed by
+                a(href="http://teothemes.com") TeoThemes
+                | . All rights reserved.
+            .large-3.columns
+              ul.rr.social
+                li
+                  a.ir.tw(href="#") Twitter
+                li
+                  a.ir.in(href="#") LinkedIn
+                li
+                  a.ir.fb(href="#") Facebook
+    // <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    script
+      window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\\/script>')
+    script(src="js/plugins.js")
+    script(src="js/main.js")
