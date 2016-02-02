@@ -1,4 +1,3 @@
-
 var objects = [];
 
 $(document).ready(function() {
@@ -24,15 +23,15 @@ $(document).ready(function() {
 
 });
 
-function predicatBy(prop){
-   return function(a,b){
-      if( parseInt(a[prop]) > parseInt(b[prop])){
-          return 1;
-      }else if( parseInt(a[prop]) < parseInt(b[prop]) ){
-          return -1;
-      }
-      return 0;
-   }
+function predicatBy(prop) {
+  return function(a, b) {
+    if (parseInt(a[prop]) > parseInt(b[prop])) {
+      return 1;
+    } else if (parseInt(a[prop]) < parseInt(b[prop])) {
+      return -1;
+    }
+    return 0;
+  }
 }
 
 //Usage
@@ -47,16 +46,16 @@ function doSearch(searchVal) {
   //Cleaning results table for new searches
   $('#tableDiv table tbody tr').remove();
 
- /* searchAmazon(searchVal);
+  searchAmazon(searchVal);
   searcheBay(searchVal);
-  searchBestBuy(searchVal);*/
+  searchBestBuy(searchVal);
+  search(searchVal);
 
-
-  if ($('#chbxShoes').prop('checked')) {
+  /*if ($('#chbxShoes').prop('checked')) {
     search(searchVal + ' shoes');
   } else {
     search(searchVal);
-  }
+  }*/
 }
 
 function search(searchVal) {
@@ -71,13 +70,13 @@ function search(searchVal) {
     }).done(function(response) {
 
       $.each(response, function(index, item) {
-	console.log(parseInt(String(item.price).split('$')[1]));
+        //console.log(parseInt(String(item.price).split('$')[1]));
         if (index <= 10) {
           objects.push({
             title: item.title,
             url: item.url,
             imageUrl: item.image,
-            price: parseInt(String(item.price).split('$')[1]),
+            price: removeSign(item.price),
             website: item.website
 
           });
@@ -92,41 +91,53 @@ function search(searchVal) {
 
 }
 
+function removeSign(price) {
+  console.log(price);
+  return parseFloat(String(price).split('$')[1].replace(/,/g , ""));
+}
+
+function addCommas(value) {
+  return String(value).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
+}
+
 function completeTable(objects) {
 
   if (objects.length > 0) {
 
 
-    console.log(objects.sort( predicatBy("price") ));
+    console.log(objects.sort(predicatBy("price")));
 
-
+    $('#results').children().remove();
     var spans = '';
     //console.log(objects);
     $.each(objects, function(i, item) {
-      //console.log(item);
-      spans += '<li class="wrapper-3">';
-      spans += '<div class="row">';
-      spans += '<div class="large-4 small-12 columns">'
-      spans += '<figure><img src="' + item.imageUrl + '"/></figure>'
-      spans += '</div>'
+      console.log('Overall price :: '+ item.price);
+      if (item.price != undefined) {
+        spans += '<li class="wrapper-3">';
+        spans += '<div class="row">';
+        spans += '<div class="large-4 small-12 columns">'
+        spans += '<figure><img src="' + item.imageUrl + '"/></figure>'
+        spans += '</div>'
 
-      //title div
-      spans += '<div class="large-5 small-8 columns">'
-      spans += '<div class="col-middle">';
-      spans += '<h2 class="text secondary"><a href="' + item.url + '" target="blank" >'+item.title+'</a></h2>';
-      spans += '</div>';
-      spans += '</div>';
+        //title div
+        spans += '<div class="large-5 small-8 columns">'
+        spans += '<div class="col-middle">';
+        spans += '<h2 class="text secondary"><a href="' + item.url + '" target="blank" >' + item.title + '</a></h2>';
+        spans += '</div>';
+        spans += '</div>';
 
-      //Price
-      spans += '<div class="large-3 small-4 columns">';
-      spans += '<div class="col-right">';
-      spans += '<p class="value primary">' + item.price + '</p>';
-      spans += '<h4>' +item.website+'</h4>'
-      spans += '<a href="' + item.url + '" target="blank" class="input button red secondary responsive" >View Item</a>';
-      spans += '</div>';
+        //Price
+        spans += '<div class="large-3 small-4 columns">';
+        spans += '<div class="col-right">';
+        spans += '<p class="value primary">$' + addCommas(item.price) + '</p>';
+        spans += '<h4>' + item.website + '</h4>'
+        spans += '<a href="' + item.url + '" target="blank" class="input button red secondary responsive" >View Item</a>';
+        spans += '</div>';
 
-      spans += '</div>';
-      spans += '</li>';
+        spans += '</div>';
+        spans += '</li>';
+
+      }
 
     });
 
@@ -146,29 +157,32 @@ function searchAmazon(searchVal) {
     type: "GET",
     url: '/amazon/' + searchVal
   }).done(function(response) {
-      console.log(response);
+    console.log(response);
     //    console.log(response.Items.Item[0].OfferSummary.LowestNewPrice.FormattedPrice);
     $.each(response.Items.Item, function(i, item) {
 
-      if(item.MediumImage != undefined)
+      if (item.MediumImage != undefined)
         image = item.MediumImage.URL;
 
-      if(item.OfferSummary.LowestNewPrice != undefined)
+      if (item.OfferSummary.LowestNewPrice != undefined)
         price = item.OfferSummary.LowestNewPrice.FormattedPrice;
 
-      if(item.ItemAttributes != undefined)
+      if (item.ItemAttributes != undefined)
         title = item.ItemAttributes.Title;
 
-      if(item != undefined)
+      if (item != undefined)
         url = item.DetailPageURL;
 
-      objects.push({
-        imageUrl: image,
-        title: title,
-        price: price,
-        url: url,
-        website: 'Amazon'
-      });
+      if(price != "Too low to display"){
+        objects.push({
+          imageUrl: image,
+          title: title,
+          price: removeSign(price),
+          url: url,
+          website: 'Amazon'
+        });
+      }
+
     });
     completeTable(objects);
   });
@@ -208,7 +222,7 @@ function showeBayResults(root) {
     objects.push({
       imageUrl: item.galleryURL,
       title: item.title,
-      price: '$' + item.sellingStatus[0].currentPrice[0].__value__,
+      price: item.sellingStatus[0].currentPrice[0].__value__,
       url: item.viewItemURL,
       website: 'eBay'
     });
@@ -217,23 +231,33 @@ function showeBayResults(root) {
   completeTable(objects);
 }
 
-function searchBestBuy(searchVal){
+function searchBestBuy(searchVal) {
 
   var APIKEY = 'pmsvxvvm28xfk7hfqck7rffq';
+  var searchTerms = String(searchVal).split('+');
+  var searchString ='';
 
+  $.each(searchTerms, function(i, val){
+    searchString += 'search=';
+    searchString += val;
+    searchString += '&'
+  });
+  searchString = searchString.substring(0, searchString.length - 1);
 
+  console.log(searchString);
   $.ajax({
     type: "GET",
-    url: '//api.bestbuy.com/v1/products(name='+ searchVal + '*)',
+    url: '//api.bestbuy.com/v1/products('+searchString+')',
     data: {
       format: 'json',
       apiKey: APIKEY
     }
-  }).done(function(response){
-    $.each(response.products, function(i, item){
+  }).done(function(response) {
+    console.log(response);
+    $.each(response.products, function(i, item) {
       objects.push({
-        title : item.name,
-        price : '$' + item.salePrice,
+        title: item.name,
+        price: item.salePrice,
         url: item.url,
         imageUrl: item.mediumImage,
         website: 'Best Buy'

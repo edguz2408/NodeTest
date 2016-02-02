@@ -26,7 +26,7 @@ block content
           .row
             .large-3.columns
               .logo
-                a(href="index.html") Couponizer
+                a(href="/") Offers Finder
             nav.large-6.columns
               ul.rr.main-menu
                 li.current
@@ -63,13 +63,21 @@ block content
                   a#clear-sb.icon.clear.ir(href="#") Clear
               .small-3.large-2.columns
                 input#btnSearch.input.button.primary.red(type="submit", value="Search")
+          
+              //nav.small-3.large-2.columns
+                //input#btnSearch.input.button.primary.blue(type="button", value="Filters", data-reveal-id="mymodal")
+                
+                //a.input.button.primary.blue(href="#", data-reveal-id="myModal") Click me
+                //#myModal.reveal_modal(data-reveal aria-labelledby="modalTitle", aria-hidden="true", role="dialog")
+                  //h2#modalTitle Awesome
+              
               nav.small-3.large-2.columns
                 ul.rr.menu-browse
                   li.input.button.primary
-                    p.label Browse
+                    p.label Filters
                     ul.rr.sub
                       li
-                        a(href="company.html") Nike
+                        a Find Shoes
                       li
                         a(href="company.html") Ray Ban
                       li
@@ -92,7 +100,18 @@ block content
         .stripe-regular.items-carousel-wrap
           .row
             .column
-              h2 New Coupons
+              h2 Filters
+              div#filters.div
+                table.table(role="grid")
+                  thead
+                    tr
+                      td <p class="label"> Find Shoes</p>
+                      td <input type="checkbox" />
+                    tr
+                      td.label Filter By Price
+                      td <input type="text" />
+              br
+                
           .row.collapse
             .column
               .items-carousel.flexslider
